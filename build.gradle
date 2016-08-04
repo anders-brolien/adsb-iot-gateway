@@ -10,4 +10,8 @@ dependencies {
     compile 'org.springframework.boot:spring-boot-starter-web:1.4.0.RELEASE'
 }
 
+task wrapper(type: Wrapper) {
+    gradleVersion = '2.14'
+}
+
 mainClassName='eu.brolien.adsb_iot.gateway.ApplicationMain'

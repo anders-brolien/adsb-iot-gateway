@@ -17,10 +17,11 @@ public class Application {
 	
 	Application(ApplicationContext ctx) {
 		
+		database = new Database();
 		
-		connector = new IOTConnector(ctx.getEnvironment());
+		connector = new IOTConnector(ctx.getEnvironment(), database);
 		
-		database = new Database(connector.getPublisher());
+		database.setPublisher(connector.getPublisher());
 		
 		consumer = new Consumer(ctx.getEnvironment(), database);
 	}
