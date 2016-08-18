@@ -24,7 +24,7 @@ public class IOTConnector {
 		KeyStorePasswordPair pair = Util.getKeyStorePasswordPair(certificateFile, privateKeyFile);
 		client = new AWSIotMqttClient(clientEndpoint, clientId, pair.keyStore, pair.keyPassword);
 		
-		adsbPublisher = new AmazonIOTADSBPublisher(client);
+		adsbPublisher = new AmazonIOTADSBPublisher(client, environment);
 		statusPublisher = new AmazonIOTStatusPublisher(client, environment, db);
 	}
 	

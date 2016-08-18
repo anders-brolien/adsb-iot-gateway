@@ -2,6 +2,7 @@ package eu.brolien.adsb_iot.gateway.amazon;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.core.env.Environment;
 
 import com.amazonaws.services.iot.client.AWSIotException;
 import com.amazonaws.services.iot.client.AWSIotMessage;
@@ -23,6 +24,7 @@ class AmazonIOTADSBPublisher implements Publisher{
     private static final Logger log = LoggerFactory.getLogger(AmazonIOTADSBPublisher.class);
 
 	private final AWSIotMqttClient client;
+	private final String device;
 
 	public class MyMessage extends AWSIotMessage {
 	    public MyMessage(String topic, AWSIotQos qos, String payload) {
@@ -44,8 +46,9 @@ class AmazonIOTADSBPublisher implements Publisher{
 	    }
 	}
 
-	 AmazonIOTADSBPublisher(AWSIotMqttClient client) {
+	 AmazonIOTADSBPublisher(AWSIotMqttClient client, Environment environment) {
 		 this.client = client;
+		 this.device = environment.getProperty("amazon_iot.clientId"); 
 	}
 
 	@Override
@@ -55,8 +58,9 @@ class AmazonIOTADSBPublisher implements Publisher{
 			if (data.getFlight().isEmpty()) {
 				data.setFlight("-");
 			}
+			data.setDevice(device);
 			String payload = mapper.writeValueAsString(data);
-			log.info("Publish: " + payload);
+			log.trace("Publish: " + payload);
 			MyMessage message = new MyMessage(topic, qos, payload);
 			client.publish(message, timeout);
 		} catch (AWSIotException | JsonProcessingException e) {

@@ -75,7 +75,7 @@ public class AmazonIOTStatusPublisher {
 			status.setDevice(device);
 			status.setTimestamp(System.currentTimeMillis());
 			String payload = mapper.writeValueAsString(status);
-			log.info("Publish: " + payload);
+			log.trace("Publish: " + payload);
 			MyMessage message = new MyMessage(topic, qos, payload);
 			client.publish(message, timeout);
 		} catch (AWSIotException | JsonProcessingException e) {

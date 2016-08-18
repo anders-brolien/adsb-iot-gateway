@@ -34,6 +34,8 @@ public class ADSBData {
 	private int messages;
 	private int seen;
 	private long timestamp;
+	private String device;
+
 	public String getHex() {
 		return hex;
 	}
@@ -113,12 +115,19 @@ public class ADSBData {
 		this.seen = seen;
 	}
 	
+	public String getDevice() {
+		return device;
+	}
+	public void setDevice(String device) {
+		this.device = device;
+	}
+	
 	@Override
 	public String toString() {
-		return "Data [hex=" + hex + ", squawk=" + squawk + ", flight=" + flight + ", lat=" + lat + ", lon=" + lon
+		return "ADSBData [hex=" + hex + ", squawk=" + squawk + ", flight=" + flight + ", lat=" + lat + ", lon=" + lon
 				+ ", validposition=" + validposition + ", altitude=" + altitude + ", vert_rate=" + vert_rate
 				+ ", track=" + track + ", validtrack=" + validtrack + ", speed=" + speed + ", messages=" + messages
-				+ ", seen=" + seen + "]";
+				+ ", seen=" + seen + ", timestamp=" + timestamp + ", device=" + device + "]";
 	}
 	public long getTimestamp() {
 		return timestamp;
