@@ -11,7 +11,7 @@
 ### END INIT INFO
 ## Fill in name of program here.
 
-SCRIPT="/home/pi/dump1090/dump1090 --net --net-beast --net-ro-port 31001"
+SCRIPT="/home/pi/dump1090/dump1090 --net --quiet --net-beast --net-ro-port 31001"
 RUNAS=root
 NAME=dump1090
 
