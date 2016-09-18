@@ -62,7 +62,12 @@ class AmazonIOTADSBPublisher implements Publisher{
 			String payload = mapper.writeValueAsString(data);
 			log.trace("Publish: " + payload);
 			MyMessage message = new MyMessage(topic, qos, payload);
-			client.publish(message, timeout);
+			
+			if (client.getConnectionStatus() == client.getConnectionStatus().CONNECTED) {
+				//only publish if connected
+				client.publish(message, timeout);
+			} 
+			
 		} catch (AWSIotException | JsonProcessingException e) {
 			log.error("", e);
 		}		

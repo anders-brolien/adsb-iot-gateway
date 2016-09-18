@@ -28,8 +28,11 @@ public class IOTConnector {
 		statusPublisher = new AmazonIOTStatusPublisher(client, environment, db);
 	}
 	
-	public void connect() throws AWSIotException {
-		client.connect();		
+	public void connect() throws AWSIotException {	
+		
+			client.setMaxConnectionRetries(Integer.MAX_VALUE);
+			//client.setMaxConnectionRetries(0);
+			client.connect();
 	}
 	
 	public Publisher getPublisher() {
