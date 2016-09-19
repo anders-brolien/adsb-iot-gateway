@@ -31,7 +31,7 @@ public class IOTConnector {
 	public void connect() throws AWSIotException {	
 		
 			client.setMaxConnectionRetries(Integer.MAX_VALUE);
-			////client.setMaxConnectionRetries(0);
+			//client.setMaxConnectionRetries(0);
 			client.connect();
 	}
 	

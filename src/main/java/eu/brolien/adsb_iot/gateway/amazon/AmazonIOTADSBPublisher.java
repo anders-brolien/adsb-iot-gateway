@@ -64,7 +64,7 @@ class AmazonIOTADSBPublisher implements Publisher{
 			MyMessage message = new MyMessage(topic, qos, payload);
 			
 			if (client.getConnectionStatus() == client.getConnectionStatus().CONNECTED) {
-				//only publish if connected.
+				//only publish if connected..
 				client.publish(message, timeout);
 			} 
 			
